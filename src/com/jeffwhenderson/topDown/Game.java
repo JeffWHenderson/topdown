@@ -1,7 +1,9 @@
 package com.jeffwhenderson.topDown;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
 	private boolean isRunning = false;
@@ -63,7 +65,21 @@ public class Game extends Canvas implements Runnable {
 		
 	}
 	
-	public void render() { // renderson everything in the game
-		//Graphics g 
+	public void render() { // renders everything in the game
+		BufferStrategy bs = this.getBufferStrategy();
+		if(bs == null) {
+			this.createBufferStrategy(3);
+			return;
+		}
+		
+		Graphics g  = bs.getDrawGraphics();
+		
+		////////////////ANYTHING UNDER THIS WILL RENDER/////////////////////////
+				g.setColor(Color.red);
+				g.fillRect(0, 0, 1000, 563);
+		////////////////ANYTHING  OVER THIS WILL RENDER////////////////////////
+		
+		g.dispose();
+		bs.show();
 	}
 }
