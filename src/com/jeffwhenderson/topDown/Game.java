@@ -20,6 +20,7 @@ public class Game extends Canvas implements Runnable {
 		start();
 		
 		handler = new Handler(); // initialize the handler for the Game
+		
 		this.addKeyListener(new KeyInput(handler)); // I'm Receiving addKeyListener from Canvas 
 		
 		handler.addObject(new DragonBorn(100, 100, ID.Player, handler));
@@ -65,7 +66,7 @@ public class Game extends Canvas implements Runnable {
 			
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				System.out.print("FPS: " + frames); // prints frame rate
+//				System.out.print("FPS: " + frames); // prints frame rate
 				frames = 0;
 			}
 		}
