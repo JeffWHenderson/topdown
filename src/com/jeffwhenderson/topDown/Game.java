@@ -6,6 +6,11 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
+	/**
+	 *  Default SerailUID
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private boolean isRunning = false;
 	private Thread thread;
 	private Handler handler;
@@ -64,8 +69,8 @@ public class Game extends Canvas implements Runnable {
 		stop();
 	}// end Run()
 	
-	public void tick() { // updates everything in the game
-		handler.tick();
+	public void tick() {
+		handler.tick(); // here I call the handler, which has a linked list of all game Objects and updates them
 	}
 	
 	public void render() { // renders everything in the game
@@ -81,7 +86,7 @@ public class Game extends Canvas implements Runnable {
 				g.setColor(Color.red);
 				g.fillRect(0, 0, 1000, 563);
 				
-				handler.render(g);
+				handler.render(g); // here I call the handler, which has a linked list of all game Objects and renders them (3 frames in advance)
 		////////////////ANYTHING  OVER THIS WILL RENDER////////////////////////
 		
 		g.dispose();
