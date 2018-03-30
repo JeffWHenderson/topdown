@@ -12,9 +12,12 @@ public class KeyInput extends KeyAdapter {
 	public void KeyPressed (KeyEvent e) {
 		int key = e.getKeyCode();
 		
-		for(GameObject object: handler.objects) {
-			if(object.getId() == ID.Player) {
-				if (key == KeyEvent.VK_W) handler.setUp(true);
+//		for(GameObject object: handler.objects) {
+		for(int i = 0; i < handler.objects.size(); i++) {
+			GameObject tempObject = handler.objects.get(i);
+			
+			if(tempObject.getId() == ID.Player) {
+				if (key == KeyEvent.VK_UP) handler.setUp(true);
 				if (key == KeyEvent.VK_A) handler.setLeft(true);
 				if (key == KeyEvent.VK_S) handler.setDown(true);
 				if (key == KeyEvent.VK_D) handler.setRight(true);
@@ -22,16 +25,16 @@ public class KeyInput extends KeyAdapter {
 		}
 	}
 	
-	public void KeyReleased (KeyEvent e) {
-		int key = e.getKeyCode();
-		
-		for(GameObject object: handler.objects) {
-			if(object.getId() == ID.Player) {
-				if (key == KeyEvent.VK_W) handler.setUp(false);
-				if (key == KeyEvent.VK_A) handler.setLeft(false);
-				if (key == KeyEvent.VK_S) handler.setDown(false);
-				if (key == KeyEvent.VK_D) handler.setRight(false);
-			}
-		}
-	}
+//	public void KeyReleased (KeyEvent e) {
+//		int key = e.getKeyCode();
+//		
+//		for(GameObject object: handler.objects) {
+////			if(object.getId() == ID.Player) {
+////				if (key == KeyEvent.VK_W) handler.setUp(false);
+////				if (key == KeyEvent.VK_A) handler.setLeft(false);
+////				if (key == KeyEvent.VK_S) handler.setDown(false);
+////				if (key == KeyEvent.VK_D) handler.setRight(false);
+//			}
+//		}
+//	}
 }

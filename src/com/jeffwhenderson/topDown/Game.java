@@ -20,9 +20,9 @@ public class Game extends Canvas implements Runnable {
 		start();
 		
 		handler = new Handler(); // initialize the handler for the Game
-		handler.addObject(new DragonBorn(100, 100, ID.Block, handler));
-		
 		this.addKeyListener(new KeyInput(handler)); // I'm Receiving addKeyListener from Canvas 
+		
+		handler.addObject(new DragonBorn(100, 100, ID.Player, handler));
 	}
 	
 	private void start() {

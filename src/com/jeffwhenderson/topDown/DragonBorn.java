@@ -14,8 +14,20 @@ public class DragonBorn extends GameObject {
 
 	@Override
 	public void tick() {
-		if(x <= 200) 
-			x += 1;
+		x += velX;
+		y += velY;
+		
+		if(handler.isUp()) velY = -5;
+		else if(!handler.isDown()) velY = 0;
+		
+		if(handler.isDown()) velY = 5;
+		else if(!handler.isUp()) velY = 0;
+		
+		if(handler.isLeft()) velX = -5;
+		else if(!handler.isRight()) velX = 0;
+		
+		if(handler.isRight()) velX = 5;
+		else if(!handler.isLeft()) velX = 0;
 	}
 
 	@Override
@@ -26,7 +38,7 @@ public class DragonBorn extends GameObject {
 
 	@Override
 	public Rectangle getBounds() {
-		return null;
+		return new Rectangle(x, y, 10, 10);
 	}
 
 }

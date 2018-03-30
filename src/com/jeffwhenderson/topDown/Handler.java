@@ -9,13 +9,19 @@ public class Handler {
 	private boolean up = false, down = false, right = false, left = false;
 
 	public void tick() {
-		for(GameObject object: objects)  	
-			object.tick();
+		for(int i = 0; i < objects.size(); i++ )  {	
+			GameObject tempObject = objects.get(i);
+			
+			tempObject.tick();
+		}
 	}
 	
 	public void render(Graphics g) {
-		for(GameObject object: objects)  	
-			object.render(g);
+		for(int i = 0; i < objects.size(); i++ )  {	
+			GameObject tempObject = objects.get(i);
+			
+			tempObject.render(g);
+		}
 	}
 	
 	public void addObject(GameObject updateableGameObject) {
