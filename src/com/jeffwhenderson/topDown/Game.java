@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class Game extends Canvas implements Runnable {
 	/**
@@ -15,13 +16,17 @@ public class Game extends Canvas implements Runnable {
 	private Thread thread;
 	private Handler handler;
 	
+	private BufferedImage level = null;
+	
 	public Game() {
 		new Window(1000, 563, "Top Down Game", this);
 		start();
 		
 		handler = new Handler(); // initialize the handler for the Game
-		
 		this.addKeyListener(new KeyInput(handler)); // I'm Receiving addKeyListener from Canvas 
+		
+		BufferedImageLoader loader = new BufferedImageLoader();
+		level = loader.loadImage("/DragonBorn_level_1.png");
 		
 		handler.addObject(new DragonBorn(100, 100, ID.Player, handler));
 	}
