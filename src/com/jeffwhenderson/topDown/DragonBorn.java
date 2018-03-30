@@ -11,7 +11,8 @@ public class DragonBorn extends GameObject {
 
 	@Override
 	public void tick() {
-		
+		x += velX; // velX and velY are inherited from the GameObject
+		y += velY;
 	}
 
 	@Override
