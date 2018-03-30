@@ -8,10 +8,13 @@ import java.awt.image.BufferStrategy;
 public class Game extends Canvas implements Runnable {
 	private boolean isRunning = false;
 	private Thread thread;
+	private Handler handler;
 	
 	public Game() {
 		new Window(1000, 563, "Top Down Game", this);
 		start();
+		
+		handler = new Handler(); // initialize the handler for the Game
 	}
 	
 	private void start() {
@@ -62,7 +65,7 @@ public class Game extends Canvas implements Runnable {
 	}// end Run()
 	
 	public void tick() { // updates everything in the game
-		
+		handler.tick();
 	}
 	
 	public void render() { // renders everything in the game
@@ -77,6 +80,8 @@ public class Game extends Canvas implements Runnable {
 		////////////////ANYTHING UNDER THIS WILL RENDER/////////////////////////
 				g.setColor(Color.red);
 				g.fillRect(0, 0, 1000, 563);
+				
+				handler.render(g);
 		////////////////ANYTHING  OVER THIS WILL RENDER////////////////////////
 		
 		g.dispose();
