@@ -3,6 +3,7 @@ package com.jeffwhenderson.topDown;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -15,6 +16,7 @@ public class Game extends Canvas implements Runnable {
 	private boolean isRunning = false;
 	private Thread thread;
 	private Handler handler;
+	private Camera camera;
 	
 	private BufferedImage level = null;
 	
@@ -23,6 +25,7 @@ public class Game extends Canvas implements Runnable {
 		start();
 		
 		handler = new Handler(); // initialize the handler for the Game
+		camera = new Camera(0, 0);
 		this.addKeyListener(new KeyInput(handler)); // I'm Receiving addKeyListener from Canvas 
 		
 		BufferedImageLoader loader = new BufferedImageLoader();
@@ -80,6 +83,13 @@ public class Game extends Canvas implements Runnable {
 	}// end Run()
 	
 	public void tick() {
+		for(int i = 0; i < handler.objects.size(); i++) {
+			if(handler.objects.get(i).getId() == ID.Player) {
+				camera.tick(handler.objects.get(i));
+//				System.out.print(object.getId());
+			}
+		}
+		
 		handler.tick(); // here I call the handler, which has a linked list of all game Objects and updates them
 	}
 	
@@ -93,12 +103,17 @@ public class Game extends Canvas implements Runnable {
 				int red = (pixel >> 16) & 0xff;
 				int green = (pixel >> 8) & 0xff;
 				int blue = (pixel) & 0xff;
-				
-				if(red == 255) 
+				//////////////////////////// heere is the problem jeffrey 
+				if(red == 255) {
 					handler.addObject(new Block(xx* 32, yy*32, ID.Block));
+//					System.out.print("b");
+				}
 				
-				if(blue == 255) 
+				if(blue == 255 && red != 255) {
 					handler.addObject(new DragonBorn(xx*32, yy*32, ID.Player, handler));
+//					System.out.println("");
+					System.out.println("a dragon was born");
+				}
 			}
 		}
 		
@@ -112,11 +127,12 @@ public class Game extends Canvas implements Runnable {
 		}
 		
 		Graphics g  = bs.getDrawGraphics();
-		
+		Graphics2D g2d = (Graphics2D) g;
 		////////////////ANYTHING UNDER THIS WILL RENDER/////////////////////////
 				g.setColor(Color.red);
 				g.fillRect(0, 0, 1000, 563);
 				
+				g2d.translate(-camera.getX(), -camera.getY());
 				handler.render(g); // here I call the handler, which has a linked list of all game Objects and renders them (3 frames in advance)
 		////////////////ANYTHING  OVER THIS WILL RENDER////////////////////////
 		
