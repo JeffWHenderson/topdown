@@ -17,17 +17,30 @@ public class DragonBorn extends GameObject {
 		x += velX;
 		y += velY;
 		
-		if(handler.isUp()) velY = -2;
+		collision();
+		
+		if(handler.isUp()) velY = -5;
 		else if(!handler.isDown()) velY = 0;
 		
-		if(handler.isDown()) velY = 2;
+		if(handler.isDown()) velY = 5;
 		else if(!handler.isUp()) velY = 0;
 		
-		if(handler.isLeft()) velX = -2;
+		if(handler.isLeft()) velX = -5;
 		else if(!handler.isRight()) velX = 0;
 		
-		if(handler.isRight()) velX = 2;
+		if(handler.isRight()) velX = 5;
 		else if(!handler.isLeft()) velX = 0;
+	}
+	
+	public void collision() {
+		for(GameObject object: handler.objects) {
+			if(object.getId() == ID.Block) {
+				if(getBounds().intersects(object.getBounds())) {
+					x += velX * -1;
+					y += velY * -1;
+				}
+			}
+		}
 	}
 
 	@Override
