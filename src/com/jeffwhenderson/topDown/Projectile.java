@@ -20,6 +20,16 @@ public class Projectile extends GameObject {
 	public void tick() {
 		x += velX;
 		y += velY;
+		
+		for(GameObject object : handler.objects) {
+			if(object.getId() == ID.Block) {
+				if(getBounds().intersects(object.getBounds())) {
+					handler.removeObject(this);
+					break;
+					//System.out.print("this is workig");
+				}
+			}
+		}
 	}
 
 	@Override
