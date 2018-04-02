@@ -51,7 +51,7 @@ public class DragonBorn extends GameObject {
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, 10, 10);
+		return new Rectangle(x, y, 20, 32);
 	}
 
 }
