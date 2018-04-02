@@ -27,6 +27,7 @@ public class Game extends Canvas implements Runnable {
 		handler = new Handler(); // initialize the handler for the Game
 		camera = new Camera(0, 0);
 		this.addKeyListener(new KeyInput(handler)); // I'm Receiving addKeyListener from Canvas 
+		this.addMouseListener(new MouseInput(handler, camera));
 		
 		BufferedImageLoader loader = new BufferedImageLoader();
 		level = loader.loadImage("/DragonBorn_level_1.png");

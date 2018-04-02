@@ -7,9 +7,13 @@ import java.awt.Rectangle;
 public class Projectile extends GameObject {
 	private Handler handler;
 	
-	public Projectile(int x, int y, ID id) {
+	public Projectile(int x, int y, ID id, Handler handler, int mouseX, int mouseY) {
 		super(x, y, id);
 		this.handler = handler;
+		
+		velX = (mouseX - x) / 10;
+		velY = (mouseY - y) / 10;
+				
 	}
 
 	@Override
